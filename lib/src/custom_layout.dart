@@ -195,7 +195,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
     double velocity = widget.scrollDirection == Axis.horizontal
         ? details.velocity.pixelsPerSecond.dx
-        : details.velocity.pixelsPerSecond.dy;
+        : -details.velocity.pixelsPerSecond.dy;
 
     if (_animationController.value >= 0.75 || velocity > 500.0) {
       if (_currentIndex <= 0 && !widget.loop) {
@@ -217,7 +217,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     _currentValue = _animationController.value;
     _currentPos = widget.scrollDirection == Axis.horizontal
         ? details.globalPosition.dx
-        : details.globalPosition.dy;
+        : -details.globalPosition.dy;
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
@@ -225,7 +225,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     double value = _currentValue +
         ((widget.scrollDirection == Axis.horizontal
                     ? details.globalPosition.dx
-                    : details.globalPosition.dy) -
+                    : -details.globalPosition.dy) -
                 _currentPos) /
             _swiperWidth /
             2;
